@@ -35,7 +35,7 @@ Route::get('/praktijkmanagement', [PraktijkmanagementController::class, 'index']
 
 Route::get('/tandarts', [TandartsController::class, 'index'])
     ->name('tandarts.index')
-    ->middleware(['auth', 'role:tandarts,praktijkmanagement']);
+    ->middleware(['auth', 'role:tandarts,']);
 
 
 Route::get('/dashboard', function () {
