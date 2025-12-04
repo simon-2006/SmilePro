@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class PraktijkmanagementController extends Controller
 {
+    private $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new User();
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -63,4 +72,17 @@ class PraktijkmanagementController extends Controller
     {
         //
     }
+
+    public function manageUsersroles()
+{
+    $users = User::query()
+        ->select('id', 'name', 'email', 'rolename')  // kolomnamen in jouw users-tabel
+        ->get();
+
+    return view('praktijkmanagement.usersroles', [
+        'title' => 'Gebruikersrollen',
+        'users' => $users,
+    ]);
+}
+
 }

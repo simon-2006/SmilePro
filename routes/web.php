@@ -8,6 +8,7 @@ use App\Http\Controllers\AssistentController;
 use App\Http\Controllers\PraktijkmanagementController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,9 +34,31 @@ Route::get('/praktijkmanagement', [PraktijkmanagementController::class, 'index']
     ->name('praktijkmanagement.index')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
-Route::get('/tandarts', [TandartsController::class, 'index'])
-    ->name('tandarts.index')
-    ->middleware(['auth', 'role:tandarts,']);
+Route::get('/praktijkmanagement/usersroles', [PraktijkmanagementController::class, 'index'])
+    ->name('praktijkmanagement.usersroles')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+    /* Praktijkmanagement Routes */
+Route::get('/praktijkmanagement', [PraktijkmanagementController::class, 'index'])
+    ->name('praktijkmanagement.index')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::get('/praktijkmanagement/usersroles', [PraktijkmanagementController::class, 'manageUsersroles'])
+    ->name('praktijkmanagement.usersroles')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::get('/praktijkmanagement/{id}/edit', [PraktijkmanagementController::class, 'edit'])
+    ->name('praktijkmanagement.edit')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::delete('/praktijkmanagement/{id}', [PraktijkmanagementController::class, 'destroy'])
+    ->name('praktijkmanagement.destroy')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
+Route::get('/praktijkmanagement/{id}', [PraktijkmanagementController::class, 'show'])
+    ->name('praktijkmanagement.show')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
 
 
 Route::get('/dashboard', function () {

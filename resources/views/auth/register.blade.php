@@ -40,7 +40,7 @@
         </div>
 
         <!-- Role Name -->
-        <div class="mt-4">
+      <!--  <div class="mt-4">
             <x-input-label for="rolename" :value="__('Role Name')" />
 
                 <x-text-input id="rolename" class="block mt-1 w-full"
@@ -48,7 +48,7 @@
                             name="rolename" required autocomplete="rolename" />
 
                 <x-input-error :messages="$errors->get('rolename')" class="mt-2" />
-        </div>
+        </div> -->
         
 
         <div class="flex items-center justify-end mt-4">
