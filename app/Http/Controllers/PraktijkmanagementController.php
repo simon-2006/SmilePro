@@ -55,6 +55,16 @@ class PraktijkmanagementController extends Controller
     public function edit(string $id)
     {
         //
+        $user = $this->userModel->sp_GetUserById($id);
+
+
+        $userroles = $this->userModel->sp_GetAllUsersRoles();
+
+        return view('praktijkmanagement.edit', [
+            'title' => 'wijzig de gebruikersrol',
+            'user' => $user,
+            'userroles' => $userroles
+        ]);
     }
 
     /**
