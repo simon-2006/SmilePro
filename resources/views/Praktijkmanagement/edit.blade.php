@@ -23,9 +23,9 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                             <div>
-                                <label for="naam" class="block font-medium text-sm text-gray-700">Naam</label>
-                                <input id="naam" name="naam" type="text" class="form-input mt-1 block w-full" value="{{ old('naam', $user->naam) }}">
-                                <x-input-error :messages="$errors->get('naam')" class="mt-2" />
+                                <label for="name" class="block font-medium text-sm text-gray-700">Naam</label>
+                                <input id="name" name="name" type="text" class="form-input mt-1 block w-full" value="{{ old('name', $user->name) }}">
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
 
                             <div>
@@ -35,14 +35,14 @@
                             </div>
 
                             <div class="md:col-span-2">
-                                <label for="rol" class="block font-medium text-sm text-gray-700">Rol</label>
-                                <select name="rol" id="rol" class="form-select mt-1 block w-full">
+                                <label for="rolename" class="block font-medium text-sm text-gray-700">Rol</label>
+                                <select name="rolename" id="rolename" class="form-select mt-1 block w-full">
                                     <option value="">--- Kies rol ---</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}" @selected($user->roles->pluck('name')->contains($role->name))>{{ $role->name }}</option>
+                                        <option value="{{ $role->name }}" @selected(old('rolename', $user->rolename) == $role->name)>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
-                                <x-input-error :messages="$errors->get('rol')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('rolename')" class="mt-2" />
                             </div>
 
                         </div>

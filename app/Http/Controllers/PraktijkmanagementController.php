@@ -54,16 +54,25 @@ class PraktijkmanagementController extends Controller
      */
     public function edit(string $id)
     {
-        //
-        $user = $this->userModel->sp_GetUserById($id);
+        // Fetch user and ensure we pass a single object (DB::select returns an array)
+        $userResult = $this->userModel->sp_GetUserById($id);
+        $user = collect($userResult)->first();
 
+        // Normalize roles to objects with a 'name' property for the view
+        $rolesResult = $this->userModel->sp_GetAllUsersRoles();
+        $roles = collect($rolesResult)->map(function ($r) {
+            return (object) ['name' => $r->rolename];
+        });
 
-        $userroles = $this->userModel->sp_GetAllUsersRoles();
+        if (! $user) {
+            return redirect()->route('praktijkmanagement.usersroles')
+                ->with('error', 'Gebruiker niet gevonden.');
+        }
 
         return view('praktijkmanagement.edit', [
             'title' => 'wijzig de gebruikersrol',
             'user' => $user,
-            'userroles' => $userroles
+            'roles' => $roles,
         ]);
     }
 
@@ -73,6 +82,18 @@ class PraktijkmanagementController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'rolename' => ['required', 'string', 'max:50']
+        ]);
+
+        $affected = $this->userModel->sp_UpdateUser(
+            $id,
+            $validated['name'],
+            $validated['email'],
+            $validated['rolename']
+        );
     }
 
     /**

@@ -1,20 +1,8 @@
-USE Breezedemo;
-
+-- Stored procedure: sp_GetUserById
 DROP PROCEDURE IF EXISTS sp_GetUserById;
-
-DELIMITER //
-
-CREATE PROCEDURE sp_GetUserById(
-    IN p_Id INT
-)
+CREATE PROCEDURE sp_GetUserById(IN p_Id INT)
 BEGIN
-    SELECT USRS.id,
-           USRS.name,
-           USRS.email,
-           USRS.rolename    
-    FROM users AS USRSs
-    WHERE USRS.Id = p_Id;
-        
-END $$
-
-DELIMITER ;
+    SELECT id, name, email, rolename
+    FROM users
+    WHERE id = p_Id;
+END;

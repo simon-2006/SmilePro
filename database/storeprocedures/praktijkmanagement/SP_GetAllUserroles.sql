@@ -1,17 +1,7 @@
-USE Breezedemo;
-
-DROP PROCEDURE IF EXISTS sp_GetUserById;
-
-DELIMITER //
-
-CREATE PROCEDURE sp_GetUserroles()
-
+-- Stored procedure: sp_GetAllUsersRoles
+DROP PROCEDURE IF EXISTS sp_GetAllUsersRoles;
+CREATE PROCEDURE sp_GetAllUsersRoles()
 BEGIN
-
-    SELECT DISTINCT(USRS.rolename)    
-    FROM users AS USRS
-    
-        
-END $$
-
-DELIMITER ;
+    SELECT DISTINCT rolename
+    FROM users;
+END;

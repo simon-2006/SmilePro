@@ -51,6 +51,10 @@ Route::get('/praktijkmanagement/{id}/edit', [PraktijkmanagementController::class
     ->name('praktijkmanagement.edit')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
+Route::put('/praktijkmanagement/{id}', [PraktijkmanagementController::class, 'update'])
+    ->name('praktijkmanagement.update')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
 Route::delete('/praktijkmanagement/{id}', [PraktijkmanagementController::class, 'destroy'])
     ->name('praktijkmanagement.destroy')
     ->middleware(['auth', 'role:praktijkmanagement']);
